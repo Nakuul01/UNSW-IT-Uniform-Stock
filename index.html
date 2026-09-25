@@ -359,9 +359,14 @@
           msg('Cannot reduce more than available.', true);
           return;
         }
-        let r=await sb.rpc('restock_uniform',{p_inventory_id:x.id,p_amount:-n});
-        if(r.error) return msg(r.error.message,true);
-      } else {
+
+        let r=await sb.rpc('reduce_uniform_stock',{
+        p_inventory_id:x.id,
+        p_amount:n
+      });
+
+      if(r.error) return msg(r.error.message,true);
+    } else {
         let r=await sb.rpc('restock_uniform',{p_inventory_id:x.id,p_amount:n});
         if(r.error) return msg(r.error.message,true);
       }
